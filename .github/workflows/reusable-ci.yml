@@ -15,6 +15,8 @@ on:
       SSH_KEY:
         required: false
         description: The SSH key to use for checking out the repository. Should only be used for verifying changes to the workflow itself.
+      SOME_SECRET:
+        required: false # false for backwards compatibility
 
 jobs:
   build:
@@ -33,3 +35,5 @@ jobs:
           cache: 'gradle'
       - name: clean build
         run: ./gradlew clean build --no-daemon --info --stacktrace
+        env:
+          some-secret: ${{ secrets.SOME_SECRET }}
